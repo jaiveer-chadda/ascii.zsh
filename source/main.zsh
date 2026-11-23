@@ -25,7 +25,10 @@ function ascii () {
     lines+=( "$line $chr   " )
   }
 
-  print -rc -- "${(@)lines}"
+  local fmt_arg='-c'
+  if [[ $1 == -l ]] fmt_arg='-l'
+
+  print -r "$fmt_arg" -- "${(@)lines}"
 }
 
 if [[ "$ZSH_EVAL_CONTEXT" == 'toplevel' ]] ascii "$@"
